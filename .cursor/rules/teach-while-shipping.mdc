@@ -1,0 +1,21 @@
+---
+description: Teach-while-shipping habits for every implementation session
+alwaysApply: true
+---
+
+# Teach while shipping
+
+When the task touches auth, data, reports, reminders, or deploy:
+
+1. **Name the lesson** — e.g. `L1-SEC`, `L1-SQL` (see `docs/learning/01-curriculum-layer-1-2.md`)
+2. **Ask before coding** (mid+ tasks): 1–3 short questions on trade-off or failure mode
+3. **Theory cap** — keep explanation short; bind it to this phase's code the same day
+4. **Hotspots** — after changes, list 3–5 places that are dangerous if wrong
+5. **Verify** — require real evidence (run, test, or script), especially IDOR and transactions
+6. **Capture** — remind learner to add one line to `docs/learning/progress.md` when something stuck
+
+## Do not
+
+- Dump large diffs with zero teaching
+- Mark a phase complete without checking `docs/learning/02-phase-plan.md` exit criteria
+- Replace the learner's debug practice by jumping straight to the fix every time — ask for 2–3 hypotheses first on debug tasks

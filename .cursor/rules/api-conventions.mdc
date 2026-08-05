@@ -1,0 +1,17 @@
+---
+description: API response and error conventions for the .NET backend
+globs: "**/*.{cs}"
+alwaysApply: false
+---
+
+# API conventions
+
+- JSON in/out
+- 401 unauthenticated; 404 (preferred) or 403 for cross-user resource access — pick one and stay consistent
+- 400 for validation with a clear body
+- Do not return stack traces to clients in production-like config
+- Internal jobs (e.g. process-due reminders) must not be anonymously callable
+
+Keep controllers thin: validation + authz + call application/domain service.
+
+Target layout when code exists: `apps/api` (or equivalent).

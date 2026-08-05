@@ -1,0 +1,24 @@
+---
+description: SQL, EF, and transaction integrity conventions
+globs: "**/*.{cs,sql}"
+alwaysApply: false
+---
+
+# SQL & integrity
+
+## Required
+
+- Status change + history insert = **one transaction**
+- Reports use DB aggregation (`GROUP BY` etc.), not "load all then count" as the primary path
+- Always filter by current `UserId` in queries for user-owned data
+- Prefer migrations as schema source of truth
+
+## Watch for
+
+- N+1 on list endpoints
+- Missing indexes only after measuring — but know when to suspect them
+- Partial updates that break invariants on failure
+
+## Teach moment
+
+Before implementing report endpoints, ask the learner to sketch the SQL / grouping in plain language first.

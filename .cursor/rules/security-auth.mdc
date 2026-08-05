@@ -1,0 +1,26 @@
+---
+description: Auth and authorization safety rules for API and auth code
+globs: "**/*.{cs,tsx,ts,jsx,js}"
+alwaysApply: false
+---
+
+# Security — Auth & AuthZ
+
+## Required
+
+- Authenticate before mutating or reading user-owned resources
+- Derive `UserId` from server identity — never trust client-supplied owner ids
+- Application routes must enforce ownership (prefer 404 over leaking existence)
+- Cookies holding credentials: `HttpOnly`; `Secure` in production; set `SameSite` deliberately
+- Never store access tokens in `localStorage`
+
+## Review checklist
+
+- [ ] Unauthenticated calls get 401
+- [ ] Cross-user id access blocked (IDOR test)
+- [ ] Password hashes only — no plaintext
+- [ ] No secrets in logs or committed files
+
+## Teach moment
+
+If editing auth, ask the learner to explain **one** of: session vs JWT, or why HttpOnly matters, before closing the task.

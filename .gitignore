@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+**/bin/
+**/obj/
+.packages/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+**/appsettings.*.local.json
+secrets.json
+
+# IDE / OS
+.vs/
+.idea/
+*.user
+*.suo
+.DS_Store
+Thumbs.db
+
+# Build / coverage
+dist/
+build/
+out/
+coverage/
+*.log
+
+# Cursor local (keep rules/skills tracked)
+.cursor/*.log

@@ -4,23 +4,24 @@
 
 ## สถานะปัจจุบัน
 
-- **Phase:** 0 — Orient  
-- **อัปเดตล่าสุด:** 2026-08-05  
-- **บันทึกสั้น:** Repo เริ่มจากเอกสาร + rules/skills — ยังไม่เริ่มโค้ดแอป  
+- **Phase:** 1 — Scaffold + Auth + IDOR (เกณฑ์หลักผ่าน; พร้อมเข้า Phase 2 เมื่อพร้อม)
+- **อัปเดตล่าสุด:** 2026-08-06  
+- **บันทึกสั้น:** Explain-back ผ่าน; มีสรุป + glossary — ดู `docs/learning/notes/phase-1-auth-summary.md` และ `glossary-auth.md`  
 
 ## Checklist รายเฟส
 
 ### Phase 0
-- [ ] อ่าน Spec overview + PRD  
-- [ ] อ่าน Learning contract  
-- [ ] พร้อมเริ่ม Phase 1  
+- [x] อ่าน Spec overview + PRD  
+- [x] อ่าน Learning contract  
+- [x] พร้อมเริ่ม Phase 1  
 
 ### Phase 1 — Auth + IDOR
-- [ ] Scaffold React + .NET + DB  
-- [ ] register/login/logout/me  
-- [ ] Cookie/HttpOnly (ไม่มี access token ใน localStorage)  
-- [ ] Explain-back auth  
-- [ ] โน้ต 1 หน้า trade-off  
+- [x] Scaffold React + .NET + DB  
+- [x] register/login/logout/me  
+- [x] Cookie/HttpOnly (ไม่มี access token ใน localStorage)  
+- [x] Explain-back auth  
+- [x] โน้ต 1 หน้า trade-off (`docs/learning/notes/phase-1-auth-choice.md`)  
+- [x] สรุปกระชับ + glossary (`phase-1-auth-summary.md`, `glossary-auth.md`)  
 
 ### Phase 2 — Applications + Transaction
 - [ ] CRUD applications  
@@ -49,7 +50,9 @@
 
 | วันที่ | เฟส | บทเรียน |
 |--------|------|---------|
-| | | |
+| 2026-08-05 | 1 | UserId ต้องมาจาก server identity; token ไม่เก็บใน localStorage |
+| 2026-08-06 | 1 | IDOR = AuthZ หลัง login; Cookie first-party + Lax ง่ายกว่า Bearer ข้ามโดเมน |
+| 2026-08-06 | 1 | Bearer ≠ third-party; SPA รีเฟรชแล้ว memory หาย — ต่างจาก cookie |
 
 ## เคส “AI พลาด / ฉันจับได้”
 

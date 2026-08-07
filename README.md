@@ -2,40 +2,69 @@
 
 โปรเจกต์ Full Stack สำหรับติดตามการสมัครงาน — ใช้เป็น **สนามฝึก fundamentals ชั้น 1–2** ควบคู่การ ship จริง
 
-## เป้าหมายสองชั้น
+## Stack
 
-| ชั้น | ความหมาย |
-|------|----------|
-| **Product** | ระบบที่คุณใช้สมัครงานจริงได้: login → บันทึกตำแหน่ง → สถานะ → รายงาน → แจ้งเตือน follow-up |
-| **Learning** | ปิดรู Auth / SQL / Transaction / HTTP / Debug / Design boundaries / Performance intuition โดย AI เป็นผู้สอนระหว่าง implement |
+- **Frontend:** React + Vite (`apps/web`)
+- **Backend:** .NET 10 Web API (`apps/api`)
+- **DB:** PostgreSQL (`docker compose`)
+- **Auth:** JWT ใน **HttpOnly cookie** — ห้ามเก็บ access token ใน `localStorage`
 
-## Stack ที่กำหนด
+## รัน local (Phase 1)
 
-- **Frontend:** React (Vite หรือเทียบเท่า)
-- **Backend:** .NET Web API
-- **DB:** PostgreSQL (หรือ SQL Server ถ้าจำเป็น)
-- **Auth:** เขียนเองในโปรเจกต์นี้ — ห้าม copy util จากที่ทำงาน
+### 1) Database
+
+**เป้าหมายหลัก:** PostgreSQL
+
+```bash
+docker compose up -d
+```
+
+แล้วตั้ง `Database:UseSqlite` เป็น `false` ใน `apps/api/appsettings.Development.json`
+
+**Fallback ตอน Docker Hub ดึง image ไม่ได้:** Development ใช้ SQLite ไฟล์ `jobtracker.dev.db` (ค่าเริ่มต้นตอนนี้) — ใช้เรียน Auth/IDOR ได้ แต่เฟสถัดไปที่เน้น SQL/Postgres ควรกลับไปใช้ PostgreSQL
+
+### 2) API
+
+```bash
+cd apps/api
+dotnet run --launch-profile http
+```
+
+API: `http://localhost:5164`  
+- Postgres → `Migrate` อัตโนมัติ  
+- SQLite fallback → `EnsureCreated`
+
+### 3) Web
+
+```bash
+cd apps/web
+npm install
+npm run dev
+```
+
+Web: `http://localhost:5173`  
+Vite proxy `/api` → API เพื่อให้ cookie อยู่ same-origin
+
+### ตรวจ auth เร็วๆ
+
+```bash
+# จาก root (PowerShell)
+./scripts/verify-auth.ps1
+```
 
 ## เอกสารสำคัญ
 
 | เอกสาร | ใช้เมื่อ |
 |--------|---------|
-| [AGENTS.md](AGENTS.md) | Context หลักให้ AI — อ่านก่อนทำงานทุกครั้ง |
-| [docs/spec/00-overview.md](docs/spec/00-overview.md) | Spec รวม + ขอบเขต |
-| [docs/learning/00-learning-contract.md](docs/learning/00-learning-contract.md) | กติกาเรียนกับ AI-as-teacher |
-| [docs/learning/02-phase-plan.md](docs/learning/02-phase-plan.md) | แผนเรียน ⟷ แผน implement |
+| [AGENTS.md](AGENTS.md) | Context หลักให้ AI |
+| [docs/spec/00-overview.md](docs/spec/00-overview.md) | Spec รวม |
+| [docs/learning/02-phase-plan.md](docs/learning/02-phase-plan.md) | แผนเฟส |
+| [docs/learning/notes/phase-1-auth-choice.md](docs/learning/notes/phase-1-auth-choice.md) | ทำไมเลือก JWT cookie |
 
-## เฟสงาน (สรุป)
+## เฟสงาน
 
-1. Scaffold + Auth + IDOR  
-2. Domain CRUD + Status history (transaction)  
-3. SQL reports + seed + debug drills  
-4. Reminders / failure / idempotency  
-5. Performance drill + deploy + explain-back  
-
-รายละเอียดและเกณฑ์ผ่าน → `docs/learning/02-phase-plan.md`
-
-## สถานะ
-
-Repo เริ่มจากเอกสาร + Cursor rules/skills — ยังไม่มีโค้ดแอป  
-เชื่อม remote git เองได้ตามสะดวก
+1. Scaffold + Auth + IDOR ← **กำลังทำ**
+2. Domain CRUD + Status history (transaction)
+3. SQL reports + seed + debug drills
+4. Reminders / failure / idempotency
+5. Performance drill + deploy + explain-back

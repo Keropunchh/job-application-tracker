@@ -25,6 +25,9 @@ build/
 out/
 coverage/
 *.log
+*.db
+*.db-shm
+*.db-wal
 
 # Cursor local (keep rules/skills tracked)
 .cursor/*.log
